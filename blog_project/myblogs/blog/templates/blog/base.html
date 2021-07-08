@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOG</title>
+
+    <!-- Bootstrap
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
+    
+    <!-- Medium style Editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Russo+One&display=swap" rel="stylesheet">    
+
+</head>
+<body>
+    <!-- NAVBAR -->
+    <div class="full-page">
+        <div class="navbar">
+            <div>
+                <a href="{% url 'about' %}">Blogging</a>
+            </div>
+            <nav>
+                <ul id='MenuItems'>
+                    <li><a href="{% url 'post_list' %}">Home</a></li>
+                    <li><a href='#'>Contact</a></li>
+                </ul>
+                <ul>
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'post_new' %}">New Post</a></li> 
+                        <li><a href="{% url 'post_draft_list' %}">Drafts</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>  
+                    {% endif %}  
+                </ul>
+            </nav>
+        </div>
+        <div class="container">
+            {% block body_block %}
+            {% endblock %}
+        </div>
+    </div>
+    <!-- <div class="full-page" style="background-image: url('https://i.ibb.co/CHR44w2/Blog-Banner-for-Website-Content.jpg');">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light techfont">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'post_list' %}">My Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.github.com">GitHub</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://www.linkedin.com">LinkedIn</a>
+                        </li>
+
+                    </ul>
+                    <div class="float-right">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            {% if request.user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'post_new' %}">New Post</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'post_draft_list' %}">Drafts</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link">Welcome: {{user.username}}</a>
+                                </li>
+                            {% else %}
+                                <li><a href="{% url 'login' %}" class="nav navbar-right">Login</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>    
+                </div>
+            </div>
+        </nav>
+    </div> -->
+    <!-- BODY_BLOCK -->
+
+
+
+</body>
+</html>
